@@ -1,0 +1,138 @@
+formatters = [
+    "plain", "bold", "italic", "ordered-list", "unordered-list", "header",
+    "link", "inline-code", "new-line", "!help", "!done"
+]
+markdown = []
+
+
+def plain(text):
+    return text
+
+
+def bold(text):
+    text = "**" + text + "**"
+    return text
+
+
+def ordered_list():
+    while True:
+
+        N_rows = int(input("Number of rows: "))
+        if N_rows > 0:
+            ordered_list = []
+            unordered_list = []
+            for i in range(1, N_rows + 1):
+                row = input(f"Row #{i}: ")
+                if x == "ordered-list":
+                    row1 = str(i) + ". " + row
+                elif x == "unordered-list":
+                    row1 = "* " + row
+                ordered_list.append(row1)
+            return "\n".join(ordered_list) + "\n"
+
+        else:
+            print("The number of rows should be greater than zero")
+            continue
+
+
+def italic(text):
+    text = "*" + text + "*"
+    return text
+
+
+def header():
+    while True:
+        level = int(input("- Level: > "))
+        if level in range(1, 7):
+            text = input("Text: ")
+            mark = "#" * level
+            return mark + " " + text + "\n"
+
+        else:
+            print("The level should be within the range of 1 to 6")
+            continue
+
+
+def inline_code(text):
+    text = "`" + text + "`"
+    return text
+
+
+def link():
+    label = input("Label: ")
+    url = input("URL: ")
+    text = "[" + label + "]" + "(" + url + ")"
+    return text
+
+
+def new_line():
+    nl = "\n"
+    return nl
+
+
+def done():
+    final_file = open(r'C:\Users\Perfect\PycharmProjects\pythonProject\Markdown Editor\Markdown Editor\task\output.md',
+                      'w')
+    for element in markdown:
+        final_file.write(element)
+    final_file.close()
+
+
+def printer(list):
+    for item in list:
+        print(item, end='')
+    print()
+
+
+while True:
+    x = input("Choose a formatter: ")
+    if x not in formatters:
+        print("Unknown formatting type or command")
+    elif x == "!help":
+        print(
+            '''Available formatters: plain bold italic header link inline-code new-line
+          Special commands: !help !done''')
+
+    elif x == "new-line":
+        each = new_line()
+        markdown.append(each)
+        printer(markdown)
+    elif x == "link":
+        each = link()
+        markdown.append(each)
+        printer(markdown)
+    elif x == "header":
+        each = header()
+        markdown.append(each)
+        printer(markdown)
+    elif x == "ordered-list":
+        each = ordered_list()
+        markdown.append(each)
+        printer(markdown)
+    elif x == "unordered-list":
+        each = ordered_list()
+        markdown.append(each)
+        printer(markdown)
+    elif x == "!done":
+        done()
+        break
+    else:
+        text = input("Text: ")
+        if x == "plain":
+            each = plain(text)
+            markdown.append(each)
+            printer(markdown)
+        elif x == "bold":
+            each = bold(text)
+            markdown.append(each)
+            printer(markdown)
+        elif x == "italic":
+            each = italic(text)
+            markdown.append(each)
+            printer(markdown)
+
+        elif x == "inline-code":
+            each = inline_code(text)
+            markdown.append(each)
+            printer(markdown)
+
